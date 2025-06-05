@@ -23,11 +23,12 @@ const getEntityKeyForSelection = require('getEntityKeyForSelection');
 const isEventHandled = require('isEventHandled');
 const isSelectionAtLeafStart = require('isSelectionAtLeafStart');
 const nullthrows = require('nullthrows');
-const setImmediate = require('setImmediate');
-
-if (window.setImmediate) {
+let setImmediate;
+if (global.setImmediate) {
   // IE11 workaround. 'setImmediate' package doesn't work with IE10/11
   setImmediate = window.setImmediate.bind(window);
+} else {
+  setImmediate = require('setImmediate');
 }
 
 // When nothing is focused, Firefox regards two characters, `'` and `/`, as
